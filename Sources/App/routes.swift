@@ -10,8 +10,8 @@ public func routes(_ router: Router) throws {
         print("Connected successfully to server")
     }*/
      _ = ProductController(router: router)
-    var success = TokenStore().fetchToken()
-    print(success)
+    /*var success = TokenStore().fetchToken()
+    print(success)*/
     router.get { req in
         return try req.view().render("Landing.html")
     }

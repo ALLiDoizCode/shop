@@ -43,7 +43,7 @@ class ProductController {
             let token = try object.content.decode(Token.self)
             token.map({ tokenObject in
                 print(tokenObject)
-                TokenStore().saveToken(token: tokenObject)
+                //TokenStore().saveToken(token: tokenObject)
             })
             let response = req.response()
             response.http.status = object.http.status

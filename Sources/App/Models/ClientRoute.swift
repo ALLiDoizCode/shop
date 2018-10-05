@@ -10,7 +10,7 @@ import Vapor
 enum ClientRoute {
     case token(tokenRequest:TokenRequest)
     case platforms
-    case products(platform:String)
+    case products
     case productDescription(id:String)
     case productImage(id:String)
     
@@ -24,8 +24,8 @@ enum ClientRoute {
                 httpReq = HTTPRequest(method: .GET, url: "\(Constants().URL)/v2/platforms")
                 httpReq.contentType = .json
                 httpReq.headers.bearerAuthorization = BearerAuthorization(token: Token.shared.access_token)
-            case .products(let platform):
-                httpReq = HTTPRequest(method: .GET, url: "\(Constants().URL)/v2/products?platform=\(platform)")
+            case .products:
+                httpReq = HTTPRequest(method: .GET, url: "\(Constants().URL)/v2/products")
                 httpReq.contentType = .json
                 httpReq.headers.bearerAuthorization = BearerAuthorization(token: Token.shared.access_token)
             case .productDescription(let id):

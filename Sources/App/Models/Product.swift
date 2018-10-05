@@ -6,6 +6,7 @@
 //
 
 import Vapor
+import MongoKitten
 
 struct Products:Content {
     var items:[Product] = []

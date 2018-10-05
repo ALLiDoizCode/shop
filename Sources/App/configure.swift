@@ -30,4 +30,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     migrations.add(model: Todo.self, database: .sqlite)
     services.register(migrations)
 
+    var middlewareConfig = MiddlewareConfig()
+    middlewareConfig.use(FileMiddleware.self)
+    services.register(middlewareConfig)
 }

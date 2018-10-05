@@ -13,7 +13,7 @@ class ProductController {
     init(router:Router) {
         self.router = router
         let productRoute = router.grouped("products")
-        productRoute.get("save",use: saveProducts)
+        //productRoute.get("save",use: saveProducts)
         productRoute.get(use: getProducts)
         productRoute.post("token", use: setToken)
     }
@@ -24,7 +24,7 @@ class ProductController {
         return req.response()
     }
     
-    func saveProducts(req: Request) throws -> Future<Response> {
+    /*func saveProducts(req: Request) throws -> Future<Response> {
         TokenStore().fetchToken()
         let client = try req.make(Client.self)
         let container = req.sharedContainer
@@ -47,7 +47,7 @@ class ProductController {
             return response
         }
         
-    }
+    }*/
     
     func setToken(req: Request) throws -> Future<Response> {
         let client = try req.make(Client.self)

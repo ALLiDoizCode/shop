@@ -14,14 +14,32 @@ class ProductController {
         self.router = router
         let productRoute = router.grouped("products")
         //productRoute.get("save",use: saveProducts)
-        productRoute.get(use: getProducts)
+        productRoute.get(String.parameter,use: getProducts)
+        productRoute.get("platforms",use: getPlatform)
         productRoute.post("token", use: setToken)
     }
     
     func getProducts(req: Request) throws -> Response {
-        let products = ProductStore().fetchProducts(marker: 0, platform: "Steam")
-        try req.content.encode(products)
-        return req.response()
+        let platform = try req.parameters.next(String.self)
+        let jsonEncoder = JSONEncoder()
+        let products = ProductStore().fetchProducts(marker: 0, platform: platform)
+        let data = try jsonEncoder.encode(products)
+        let repsonse = req.response()
+        repsonse.http.body = HTTPBody(data: data)
+        return repsonse
+    }
+    
+    func getPlatform(req: Request) throws -> Future<Response> {
+        TokenStore().fetchToken()
+        let client = try req.make(Client.self)
+        let container = req.sharedContainer
+        let platforms = try self.apiClient.send(client:client, clientRoute: .platforms, container: container, response: req.response())
+        return platforms.map({ object in
+            let response = req.response()
+            response.http.status = object.http.status
+            response.http.body = object.http.body
+            return response
+        })
     }
     
     /*func saveProducts(req: Request) throws -> Future<Response> {

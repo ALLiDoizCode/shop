@@ -24,10 +24,17 @@ class ProductController {
         
         let product = try self.apiClient.send(client:client, clientRoute: .products(platform: "Steam"), container: container, response: req.response())
         
-        return product.map(to: Response.self) { response in
+        return product.map(to: Response.self) { object in
+            let products = try object.content.decode(Products.self)
+            /*let jsonDecoder = JSONDecoder()
+            let items = try jsonDecoder.decode(Products.self, from: object.http.body.data!)
+            print(items)*/
+            products.map({ productsObject in
+                print(productsObject)
+            })
             let response = req.response()
-            response.http.status = response.http.status
-            response.http.body = response.http.body
+            response.http.status = object.http.status
+            response.http.body = object.http.body
             return response
         }
         

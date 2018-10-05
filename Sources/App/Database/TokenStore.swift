@@ -13,13 +13,12 @@ class TokenStore {
         var success:Bool!
         
         let document:Document = [
-            "access_token":token.access_token,
-            "expires_in":token.expires_in,
-            "token_type":token.token_type
+            "accessToken":token.access_token,
+            "expiresIn":token.expires_in,
+            "tokenType":token.token_type
         ]
         
         do {
-            
             try MongoClient.sharedInstance.tokenCollection.insert(document)
             success = true
         }catch {
@@ -35,16 +34,16 @@ class TokenStore {
         var success:Bool!
         
         let document:Document = [
-            "token_type":token.token_type
+            "tokenType":token.token_type
         ]
         
         do {
             
             let update:Document = [
                 "$set": [
-                    "access_token":token.access_token,
-                    "expires_in":token.expires_in,
-                    "token_type":token.token_type
+                    "accessToken":token.access_token,
+                    "expiresIn":token.expires_in,
+                    "tokenType":token.token_type
                 ]
             ]
             
@@ -76,9 +75,9 @@ class TokenStore {
             return false
         }
         
-        let access_token = String(describing:results["access_token"] ?? Document())
-        let expires_in = Int(results["expires_in"] ?? Document()) ?? 0
-        let token_type = String(describing:results["token_type"] ?? Document())
+        let access_token = String(describing:results["accessToken"] ?? Document())
+        let expires_in = Int(results["expiresIn"] ?? Document()) ?? 0
+        let token_type = String(describing:results["tokenType"] ?? Document())
         
         Token.shared = Token(access_token: access_token, token_type: token_type, expires_in: expires_in)
         

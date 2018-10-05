@@ -18,7 +18,7 @@ class ProductController {
     }
     
     func getProducts(req: Request) throws -> Future<Response> {
-        try TokenHandler().checkoutToken(req:req)
+        TokenStore().fetchToken()
         let client = try req.make(Client.self)
         let container = req.sharedContainer
         
@@ -43,7 +43,7 @@ class ProductController {
             let token = try object.content.decode(Token.self)
             token.map({ tokenObject in
                 print(tokenObject)
-                //TokenStore().saveToken(token: tokenObject)
+                TokenStore().updateToken(token: tokenObject)
             })
             let response = req.response()
             response.http.status = object.http.status

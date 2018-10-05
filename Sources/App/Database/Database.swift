@@ -19,5 +19,6 @@ class MongoClient {
         self.database = database
         tokenCollection = self.database["tokenCollection"]
         productCollection = self.database["productCollection"]
+        MongoClient.sharedInstance = self
     }
 }

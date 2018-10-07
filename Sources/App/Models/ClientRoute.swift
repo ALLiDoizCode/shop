@@ -29,7 +29,7 @@ enum ClientRoute {
                 httpReq.contentType = .json
                 httpReq.headers.bearerAuthorization = BearerAuthorization(token: Token.shared.access_token)
             case .productDescription(let id):
-                httpReq = HTTPRequest(method: .GET, url: "\(Constants().URL)/v2/\(id)/description")
+                httpReq = HTTPRequest(method: .GET, url: "\(Constants().URL)/v2/products/\(id)/description")
                 httpReq.contentType = .json
                 httpReq.headers.bearerAuthorization = BearerAuthorization(token: Token.shared.access_token)
             case .productImage(let id):

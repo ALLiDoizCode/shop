@@ -48,7 +48,7 @@ class ProductStore {
         
         let query = Query(document)
         do {
-            docs = try MongoClient.sharedInstance.productCollection.find(query, skipping: marker, limitedTo: 50)
+            docs = try MongoClient.sharedInstance.productCollection.find(query, skipping: marker, limitedTo: 3000)
             print(try docs.count())
             for doc in docs {
                 let product = try BSONDecoder().decode(Product.self, from: doc)

@@ -18,7 +18,7 @@ class ProductController {
         productRoute.get("description",String.parameter,use: getDescription)
         productRoute.get("platforms",use: getPlatform)
         //productRoute.get("platforms",use: getPlatform)
-        productRoute.post("token", use: setToken)
+        productRoute.get("token", use: setToken)
     }
     
     func getProducts(req: Request) throws -> Response {

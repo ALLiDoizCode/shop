@@ -3,16 +3,16 @@ $(".button-collapse").sideNav();
 var noImage = "https://api.codeswholesale.com/assets/images/no-image.jpg";
 var cards = document.getElementById("cards");
 var menu = document.getElementById("menu");
-var featured = document.getElementById("featured");
 var searchInput = document.getElementById("search");
 var close = document.getElementById("close");
 var marker = 0
 var menuCells = [];
+var objects;
 
 platforms(gotPlatforms);
 products(gotProducts,"Steam",0);
-var objects;
 
+//sessionStorage.clear();
 close.onclick = function(){
     searchInput.value = ""
 }
@@ -94,7 +94,8 @@ function makeCard(item) {
     image.setAttributeNode(newClass("activator"));
     image.src = item.images[1].image
     image.onclick = function(){
-        console.log("boom");
+        sessionStorage.setItem('productID', item.productId);
+        window.location.href = "Views/DetailPage.html";
     }
 
     var cardContent = document.createElement("div");

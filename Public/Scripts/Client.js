@@ -1,6 +1,6 @@
 var prod = "https://zerp-shop.herokuapp.com/";
 var locol = "http://localhost:8080/";
-var SERVER = prod;
+var SERVER = locol;
 
 function products(callback,platform,marker) {
     var xhttp = new XMLHttpRequest();
@@ -13,6 +13,21 @@ function products(callback,platform,marker) {
         }
     };
     xhttp.open("GET", SERVER+"products/"+platform+"/"+marker, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send();
+}
+
+function description(callback,id) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let json = JSON.parse(xhttp.responseText);
+            //var myJsonString = JSON.stringify(json);
+            if(callback) callback(json);
+        }else {
+        }
+    };
+    xhttp.open("GET", SERVER+"products/description/"+id, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send();
 }

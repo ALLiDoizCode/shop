@@ -1,10 +1,19 @@
 var featured = document.getElementById("featured");
+var title = document.getElementById("title");
+var info = document.getElementById("info");
 var id = sessionStorage.getItem('productID');
 description(setupDetailPage,id)
 
 function setupDetailPage(obj) {
     console.log(id);
     console.log(obj);
+    title.innerHTML = obj.officialTitle;
+    obj.factSheets.forEach(function(desc){
+        if (desc.territory == "English") {
+            info.innerHTML = desc.description;
+        }
+    })
+
     obj.photos.forEach(function(photo){
         if(photo.type == "SCREEN_SHOT_LARGE") { 
             var a = document.createElement("a");
@@ -16,7 +25,7 @@ function setupDetailPage(obj) {
         }
     })
     
-    $('.carousel.carousel-slider').carousel({
+    $('.carousel').carousel({
         fullWidth: true,
         indicators: true
     });

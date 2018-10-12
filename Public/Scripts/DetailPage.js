@@ -4,23 +4,47 @@ var info = document.getElementById("info");
 var cardTags = document.getElementById("cardTags");
 var cardBody = document.getElementById("cardBody");
 var product = JSON.parse(sessionStorage.getItem('product'));
+var conversion = sessionStorage.getItem('conversion');
 var videoHeight;
 console.log(product);
 description(setupDetailPage,product.productId)
 
 function setupDetailPage(obj) {
+    var amount = (product.prices[0].value / conversion).toFixed(3);
     console.log(product);
     console.log(obj);
     title.innerText = obj.officialTitle;
     
     setupTags(obj);
+    var div = document.createElement("div");
+    var row = document.createElement("div");
+    row.setAttributeNode(newClass("row"));
+    var btn = document.createElement("a");
+    btn.setAttributeNode(newClass("waves-effect waves-light btn large"));
+    btn.innerHTML = "Buy "+amount+" XRP"
+    btn.href = "#"
+    btn.onclick = function(){
+        anchorObject.detail.txAmount = amount;
+        anchorObject.detail.txDescription = product.name;
+        anchorObject.detail.metaData = product.productId;
+        openWallet(anchorObject);
+    }
 
+    var cardPrice = document.createElement("span");
+    cardPrice.setAttributeNode(newClass("card-title"));
+    cardPrice.innerHTML = amount+" XRP";
 
+    info.appendChild(btn);
+    //btn.appendChild(cardPrice);
+    info.appendChild(row);
     obj.factSheets.forEach(function(desc){
+        
         if (desc.territory == "English") {
-            info.innerHTML = desc.description;
-        }
+            div.innerHTML = desc.description;
+        } 
     })
+
+    info.appendChild(div);
 
     obj.videos.forEach(function(videoObject){
         var a = document.createElement("a");

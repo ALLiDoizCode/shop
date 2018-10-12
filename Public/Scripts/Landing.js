@@ -11,6 +11,7 @@ var objects;
 var conversion; 
 eurToXRP(function(obj){
     conversion = obj.high
+    sessionStorage.setItem('conversion', conversion);
     platforms(gotPlatforms);
     products(gotProducts,"Steam",0);
 });
@@ -111,7 +112,7 @@ function makeCard(item) {
     cardPrice.innerHTML = amount+" XRP";
 
     var cardTitle = document.createElement("p");
-    //cardTitle.setAttributeNode(newClass("card-title"));
+    cardTitle.setAttributeNode(newClass("card-title"));
     cardTitle.innerHTML = item.name
 
     var cardDescription = document.createElement("p");
@@ -121,7 +122,7 @@ function makeCard(item) {
 
     var btn = document.createElement("a");
     btn.setAttributeNode(newClass("waves-effect waves-light btn"));
-    btn.innerHTML = "Buy"
+    btn.innerHTML = "Buy "+amount+" XRP"
     btn.href = "#"
     btn.onclick = function(){
         anchorObject.detail.txAmount = amount;
@@ -132,14 +133,14 @@ function makeCard(item) {
     card.appendChild(cardImage);
     cardImage.appendChild(image);
     //cardImage.appendChild(cardTitle);
-    cardContent.appendChild(cardPrice)
     cardContent.appendChild(cardTitle)
+    //cardContent.appendChild(btn)
     card.appendChild(cardContent);
     item.languages.forEach(function(lang){
         var detail = document.createElement("a");
         detail.href = "#"
         detail.innerHTML = lang;
-        cardAction.appendChild(detail);
+        cardContent.appendChild(detail);
     })
     cardAction.appendChild(btn)
     card.appendChild(cardAction);

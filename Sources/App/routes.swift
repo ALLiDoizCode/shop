@@ -14,7 +14,7 @@ public func routes(_ router: Router) throws {
     //var success = TokenStore().fetchToken()
     //print(success)
     router.get { req in
-        return try req.view().render("Landing.html")
+        return try req.view().render("landing.html")
     }
     
     // Basic "Hello, world!" example

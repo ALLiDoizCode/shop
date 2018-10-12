@@ -8,9 +8,12 @@ var close = document.getElementById("close");
 var marker = 0
 var menuCells = [];
 var objects;
-
-platforms(gotPlatforms);
-products(gotProducts,"Steam",0);
+var conversion; 
+eurToXRP(function(obj){
+    conversion = obj.high
+    platforms(gotPlatforms);
+    products(gotProducts,"Steam",0);
+});
 
 //sessionStorage.clear();
 close.onclick = function(){
@@ -80,6 +83,7 @@ function makeCell(name) {
 }
 
 function makeCard(item) {
+    var amount = (item.prices[0].value / conversion).toFixed(3);
     var a = document.createElement("a");
     var div = document.createElement("div");
     div.setAttributeNode(newClass('col s12 m6 l4 id="ProductCard"'));
@@ -94,7 +98,8 @@ function makeCard(item) {
     image.setAttributeNode(newClass("activator"));
     image.src = item.images[1].image
     image.onclick = function(){
-        sessionStorage.setItem('productID', item.productId);
+        var itemString = JSON.stringify(item);
+        sessionStorage.setItem('product', itemString);
         window.location.href = "Views/DetailPage.html";
     }
 
@@ -103,7 +108,7 @@ function makeCard(item) {
 
     var cardPrice = document.createElement("span");
     cardPrice.setAttributeNode(newClass("card-title"));
-    cardPrice.innerHTML = item.prices[0].value+" XRP";
+    cardPrice.innerHTML = amount+" XRP";
 
     var cardTitle = document.createElement("p");
     //cardTitle.setAttributeNode(newClass("card-title"));
@@ -118,7 +123,12 @@ function makeCard(item) {
     btn.setAttributeNode(newClass("waves-effect waves-light btn"));
     btn.innerHTML = "Buy"
     btn.href = "#"
-
+    btn.onclick = function(){
+        anchorObject.detail.txAmount = amount;
+        anchorObject.detail.txDescription = item.name;
+        anchorObject.detail.metaData = item.productId;
+        openWallet(anchorObject);
+    }        
     card.appendChild(cardImage);
     cardImage.appendChild(image);
     //cardImage.appendChild(cardTitle);

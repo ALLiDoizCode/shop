@@ -15,16 +15,34 @@
 </head>
 <body style="background-color:#eceff1;">
     <div class="container">
-        <div class="col s6">
+        <div>
+            <div class="row">
+                    <div class="col s12 m4 l4" id="cardTags">
+                    </div>
+                    <div class="col s12 m8 l8" id="cardDetail">
+                        <div class="card" style="height: 51%;">
+                            <div class="card-content" id="productCard">
+                                <span class="card-title" id="title"></span>  
+                                <div class="carousel carousel-slider" style="height: 100%; width: auto;" id="featured"></div>
+                                
+                            </div>    
+                        </div>        
+                    </div>
+                </div> 
+                <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content" id="info">
+                                <!--<span class="card-title grey-text text-darken-4" id="title"></span>-->
+                        </div>        
+                    </div>
+                </div>
+            </div>  
         </div>
-        <div class="col s6">
-            <blockquote id="title"></blockquote>
-            <div class="carousel carousel-slider" id="featured">
-            </div>
             <div class="row"></div>
-                <div class="card horizontal">
+                <div class="card">
                 <div class="card-stacked">
-                    <div class="card-content" id="info">
+                    <!--<div class="card-content" id="info">-->
                     </div>
                     <div class="card-action">
                     </div>
@@ -33,6 +51,7 @@
         </div>
     </div>
 </body>
+<script type="text/javascript" src="../Scripts/flv.min.js"></script>
 <script type="text/javascript" src="../Scripts/Client.js"></script>
 <script type="text/javascript" src="../Scripts/DetailPage.js"></script>
 </html>

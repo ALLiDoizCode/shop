@@ -2,8 +2,9 @@ var featured = document.getElementById("featured");
 var title = document.getElementById("title");
 var info = document.getElementById("info");
 var cardTags = document.getElementById("cardTags");
+var cardBody = document.getElementById("cardBody");
 var product = JSON.parse(sessionStorage.getItem('product'));
-
+var videoHeight;
 console.log(product);
 description(setupDetailPage,product.productId)
 
@@ -32,8 +33,8 @@ function setupDetailPage(obj) {
             var iframeDiv = document.createElement("div");
             iframeDiv.setAttributeNode(newClass("video-container"));
             var iframe = document.createElement("iframe");
-            iframe.width = "853";
-            iframe.height = "480";
+            //iframe.width = "853";
+            //iframe.height = "480";
             iframe.src = url+"embed/"+videoID;
             iframe.frameborder = 0;
             var newAtr = document.createAttribute("allowfullscreen")
@@ -47,6 +48,8 @@ function setupDetailPage(obj) {
             
             a.appendChild(iframeDiv);
             //obj.videos = []
+            
+            console.log(videoHeight);
         }else{
             var iframe = document.createElement("video");
             iframe.setAttributeNode(newClass("responsive-video"))
@@ -59,6 +62,7 @@ function setupDetailPage(obj) {
                 iframe.autoplay = true;
             }
             
+            console.log(videoHeight);
         }
         featured.appendChild(a);       
     })
@@ -78,6 +82,8 @@ function setupDetailPage(obj) {
         fullWidth: true,
         indicators: true
     });
+    
+    cardBody.style.height = "auto";
 }
 
 function setupTags(obj) {
@@ -85,20 +91,20 @@ function setupTags(obj) {
     categoryDiv.setAttributeNode(newClass("col s12"));
     var category = document.createElement("p");
     category.setAttributeNode(newClass("flow-text"));
-    category.innerText = "Tags";
+    category.innerText = "Categorys";
     categoryDiv.appendChild(category);
     var tagArray = obj.category.split(", ");
     tagArray.forEach(function(word){
         var tag = document.createElement("blockquote");
-        tag.style.margin = 0;
-        tag.setAttributeNode(newClass("col s5 m3"));
+        tag.style.margin = 5;
+        tag.setAttributeNode(newClass("col s5 m12"));
         tag.style.backgroundColor = "white"
         tag.innerText = word;
         var space = document.createElement("p");
         space.setAttributeNode(newClass("col s1"));
         space.innerText = "    "
         categoryDiv.appendChild(tag);
-        categoryDiv.appendChild(space);
+        //categoryDiv.appendChild(space);
     })
     cardTags.appendChild(categoryDiv);
 
@@ -111,15 +117,15 @@ function setupTags(obj) {
     var platformArray = obj.platform.split(", ");
     platformArray.forEach(function(word){
         var tag = document.createElement("blockquote");
-        tag.style.margin = 0;
-        tag.setAttributeNode(newClass("col s5 m3"));
+        tag.style.margin = 5;
+        tag.setAttributeNode(newClass("col s5 m12"));
         tag.style.backgroundColor = "white"
         tag.innerText = word;
         var space = document.createElement("p");
         space.setAttributeNode(newClass("col s1"));
         space.innerText = "    "
         platformDiv.appendChild(tag);
-        platformDiv.appendChild(space);
+        //platformDiv.appendChild(space);
     })
     cardTags.appendChild(platformDiv);
 
@@ -132,15 +138,15 @@ function setupTags(obj) {
     var languageArray = obj.inTheGameLanguages;
     languageArray.forEach(function(word){
         var tag = document.createElement("blockquote");
-        tag.style.margin = 0;
-        tag.setAttributeNode(newClass("col s5 m3"));
+        tag.style.margin = 5;
+        tag.setAttributeNode(newClass("col s5 m12"));
         tag.style.backgroundColor = "white"
         tag.innerHTML = word;
         var space = document.createElement("p");
         space.setAttributeNode(newClass("col s1"));
         space.innerText = "    "
         languageDiv.appendChild(tag);
-        languageDiv.appendChild(space);
+        //languageDiv.appendChild(space);
     })
     cardTags.appendChild(languageDiv);
 }
@@ -161,6 +167,18 @@ function convertFLV(videoElement,url){
         flvPlayer.attachMediaElement(videoElement);
         flvPlayer.load();
         //flvPlayer.play();
+    }
+}
+
+function didResize(){
+    var w = window.outerWidth;
+    console.log(w);
+    if(w > 1800) {
+        featured.style.height = "60%"
+    }else if (w > 1200) {
+        featured.style.height = "50%"
+    }else {
+        featured.style.height = "30%"
     }
 }
 

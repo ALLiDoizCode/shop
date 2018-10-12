@@ -13,38 +13,38 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </head>
-<body style="background-color:#eceff1;">
+<body style="background-color:#eceff1;" onresize="didResize()">
     <div class="container">
-        <div>
             <div class="row">
-                    <div class="col s12 m12 l6" id="cardTags">
-                    </div>
-                    <div class="col s12 m12 l6" id="cardDetail">
-                        <p class="flow-text" id="title"></p>
-                        <div class="card small" style="height: 380px;">
-                            <div class="card-content" id="productCard">
-                                <!--<span class="card-title" id="title"></span>-->
-                                <div class="carousel carousel-slider" style="height: 100%; width: auto;" id="featured"></div>
-                                
-                            </div>    
-                        </div>        
-                    </div>
-                </div> 
+                
                 <div class="row">
-                <div class="col s12">
-                    <div class="card">
-                        <div class="card-content" id="info">
-                                <!--<span class="card-title grey-text text-darken-4" id="title"></span>-->
-                        </div>        
+                        <div class="col s12 m3 l2" id="cardTags">
+                            </div>
+                        <div class="col s12 m8 l10" id="cardDetail">
+                            <p class="flow-text" id="title"></p>
+                            <div class="card" id="cardBody">
+                                <div class="card-content" id="productCard">
+                                    <!--<span class="card-title" id="title"></span>-->
+                                    <div class="carousel carousel-slider"  id="featured" style="height:105%"></div>
+                                    
+                                </div>    
+                            </div>        
+                        </div>
+                    </div> 
+                    <div class="row">
+                    <div class="col s12">
+                        <div class="card">
+                            <div class="card-content" id="info">
+                                    <!--<span class="card-title grey-text text-darken-4" id="title"></span>-->
+                            </div>        
+                        </div>
                     </div>
                 </div>
-            </div>  
-        </div>
-        </div>
+            </div>
+            </div>
         </div>
     </div>
 </body>
-<script type="text/javascript" src="../Scripts/flv.min.js"></script>
 <script type="text/javascript" src="../Scripts/Client.js"></script>
 <script type="text/javascript" src="../Scripts/DetailPage.js"></script>
 </html>

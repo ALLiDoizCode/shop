@@ -85,12 +85,13 @@ function setupTags(obj) {
     categoryDiv.setAttributeNode(newClass("col s12"));
     var category = document.createElement("p");
     category.setAttributeNode(newClass("flow-text"));
-    category.innerText = "Category";
+    category.innerText = "Tags";
     categoryDiv.appendChild(category);
     var tagArray = obj.category.split(", ");
     tagArray.forEach(function(word){
         var tag = document.createElement("blockquote");
-        tag.setAttributeNode(newClass("col s5"));
+        tag.style.margin = 0;
+        tag.setAttributeNode(newClass("col s5 m3"));
         tag.style.backgroundColor = "white"
         tag.innerText = word;
         var space = document.createElement("p");
@@ -110,7 +111,8 @@ function setupTags(obj) {
     var platformArray = obj.platform.split(", ");
     platformArray.forEach(function(word){
         var tag = document.createElement("blockquote");
-        tag.setAttributeNode(newClass("col s5"));
+        tag.style.margin = 0;
+        tag.setAttributeNode(newClass("col s5 m3"));
         tag.style.backgroundColor = "white"
         tag.innerText = word;
         var space = document.createElement("p");
@@ -130,9 +132,10 @@ function setupTags(obj) {
     var languageArray = obj.inTheGameLanguages;
     languageArray.forEach(function(word){
         var tag = document.createElement("blockquote");
-        tag.setAttributeNode(newClass("col s5"));
+        tag.style.margin = 0;
+        tag.setAttributeNode(newClass("col s5 m3"));
         tag.style.backgroundColor = "white"
-        tag.innerText = word;
+        tag.innerHTML = word;
         var space = document.createElement("p");
         space.setAttributeNode(newClass("col s1"));
         space.innerText = "    "

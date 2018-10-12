@@ -115,7 +115,7 @@ function setupTags(obj) {
     categoryDiv.setAttributeNode(newClass("col s12"));
     var category = document.createElement("p");
     category.setAttributeNode(newClass("flow-text"));
-    category.innerText = "Categorys";
+    category.innerText = "Categories";
     categoryDiv.appendChild(category);
     var tagArray = obj.category.split(", ");
     tagArray.forEach(function(word){

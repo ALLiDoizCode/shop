@@ -11,8 +11,8 @@ class APIClient {
     
     func send(client: Client,clientRoute:ClientRoute,container:Container,response:Response) throws -> EventLoopFuture<Response> {
         print(client)
-        let httpRes = client.send(Request(http: clientRoute.request(), using: container))
-        print(clientRoute.request())
+        let httpRes = client.send(Request(http: try clientRoute.request(), using: container))
+        print(try clientRoute.request())
         print(httpRes)
         return httpRes
     }

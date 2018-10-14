@@ -30,7 +30,7 @@ function search(name) {
         cards.removeChild(cards.firstChild);
     }
     objects.forEach(function(item){
-        console.log(item)
+        //console.log(item)
         if(item.images[0].image != undefined) {
             var lowercaseName = item.name.toLowerCase();
             if(lowercaseName.includes(name)){
@@ -44,7 +44,7 @@ function search(name) {
 function gotProducts(obj) {
     objects = obj
     obj.forEach(function(item){
-        console.log(item)
+        //console.log(item)
 
         if(item.images[0].image != undefined) {
             cards.appendChild(makeCard(item))

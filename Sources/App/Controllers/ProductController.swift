@@ -19,6 +19,32 @@ class ProductController {
         productRoute.get("platforms",use: getPlatform)
         //productRoute.get("platforms",use: getPlatform)
         productRoute.get("token", use: setToken)
+        productRoute.post("orders", use: makeOrder)
+        productRoute.post("update", use: updateProducts)
+    }
+    func updateProducts(req: Request) throws -> Response{
+        print(req.response())
+        return req.response()
+    }
+    
+    func makeOrder(req: Request) throws -> Future<Response> {
+        print("boom")
+        TokenStore().fetchToken()
+        let orders = try req.content.decode(Orders.self)
+        return orders.flatMap(to: Response.self) { object in
+            print(object)
+            let client = try req.make(Client.self)
+            let container = req.sharedContainer
+            let platforms = try self.apiClient.send(client:client, clientRoute: .orders(orders: object), container: container, response: req.response())
+            return platforms.map({ orderResponse in
+                print(orderResponse)
+                let response = req.response()
+                response.http.status = orderResponse.http.status
+                response.http.body = orderResponse.http.body
+                return response
+            })
+        }
+
     }
     
     func getProducts(req: Request) throws -> Response {

@@ -23,8 +23,9 @@ class ProductController {
         productRoute.post("update", use: updateProducts)
     }
     func updateProducts(req: Request) throws -> Response{
-        print(req.response())
-        return req.response()
+        let resposne = req.response()
+        resposne.http.body = req.http.body
+        return resposne
     }
     
     func makeOrder(req: Request) throws -> Future<Response> {

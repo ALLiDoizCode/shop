@@ -23,3 +23,12 @@ function openWallet(object) {
 window.addEventListener('message', function(ev) {
     console.log(ev);
 }, true); // useCapture: true
+
+function sha256(str) {
+    // We transform the string into an arraybuffer.
+    var buffer = new TextEncoder("utf-8").encode(str);
+    return crypto.subtle.digest("SHA-256", buffer).then(function (hash) {
+      return hash;
+    });
+  }
+  

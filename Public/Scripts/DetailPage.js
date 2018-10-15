@@ -10,7 +10,14 @@ console.log(product);
 description(setupDetailPage,product.productId)
 
 function setupDetailPage(obj) {
-    var amount = (product.prices[0].value / conversion).toFixed(3);
+    var amount;
+    var priceValue;
+    product.prices.forEach(function(price){
+        if(price.from == 100){
+            amount = (price.value / conversion).toFixed(3);
+            priceValue = price.value;
+        }
+    })
     console.log(product);
     console.log(obj);
     title.innerText = obj.officialTitle;
@@ -25,8 +32,11 @@ function setupDetailPage(obj) {
     btn.href = "#"
     btn.onclick = function(){
         anchorObject.detail.txAmount = amount;
+        anchorObject.detail.value = priceValue;
+        anchorObject.detail.conversion = conversion;
         anchorObject.detail.txDescription = product.name;
         anchorObject.detail.metaData = product.productId;
+        anchorObject.detail.invoiceID = "4AAC45B7A04109BFF780AD8D97F3D24D848206EE6BC476CCD7A5298953BC959C"
         openWallet(anchorObject);
     }
 

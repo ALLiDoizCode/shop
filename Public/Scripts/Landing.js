@@ -84,7 +84,16 @@ function makeCell(name) {
 }
 
 function makeCard(item) {
-    var amount = (item.prices[0].value / conversion).toFixed(3);
+    var amount;
+    var priceValue;
+    item.prices.forEach(function(price){
+        if(price.from == 100){
+            console.log(price.value);
+            console.log(item.name);
+            priceValue = price.value
+            amount = (price.value / conversion).toFixed(3);
+        }
+    })
     var a = document.createElement("a");
     var div = document.createElement("div");
     div.setAttributeNode(newClass('col s12 m6 l4 id="ProductCard"'));
@@ -126,8 +135,12 @@ function makeCard(item) {
     btn.href = "#"
     btn.onclick = function(){
         anchorObject.detail.txAmount = amount;
+        anchorObject.detail.value = priceValue;
+        anchorObject.detail.conversion = conversion;
         anchorObject.detail.txDescription = item.name;
         anchorObject.detail.metaData = item.productId;
+        anchorObject.detail.invoiceID = "4AAC45B7A04109BFF780AD8D97F3D24D848206EE6BC476CCD7A5298953BC959C"
+        //var anchorObjectString = JSON.stringify(anchorObject);
         openWallet(anchorObject);
     }        
     card.appendChild(cardImage);

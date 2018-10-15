@@ -64,7 +64,7 @@ function eurToXRP(callback) {
 
 function makeOrder(callback) {
     var order = {
-        "allowPreOrder": true,
+        "allowPreOrder": false,
         "orderId": "testid",
         "products": [
           {

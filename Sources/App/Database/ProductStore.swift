@@ -10,7 +10,7 @@ import MongoKitten
 
 class ProductStore {
     
-    /*func saveProducts(products:Products) -> Bool {
+    func saveProducts(products:Products) -> Bool {
         
         var success:Bool!
         var docs:[Document] = []
@@ -35,7 +35,21 @@ class ProductStore {
         }
         
         return success
-    }*/
+    }
+    
+    func dropProducts() -> Bool {
+        var success:Bool!
+        
+        do {
+            try MongoClient.sharedInstance.productCollection.drop()
+            success = true
+        }catch {
+            print(error.localizedDescription)
+            success = false
+        }
+        
+        return success
+    }
     
     func fetchProducts(marker:Int,platform:String) -> Products {
         

@@ -87,6 +87,7 @@ function makeCard(item) {
     var amount;
     var priceValue;
     item.prices.forEach(function(price){
+        console.log(price);
         if(price.from == 100){
             console.log(price.value);
             console.log(item.name);

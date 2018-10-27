@@ -1,6 +1,6 @@
 var prod = "https://zerp-shop.herokuapp.com/";
 var locol = "http://localhost:8080/";
-var SERVER = locol;
+var SERVER = prod;
 
 function products(callback,platform,marker) {
     var xhttp = new XMLHttpRequest();
